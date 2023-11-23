@@ -38,6 +38,7 @@ dependencies:
   flutter_native_splash: ^2.3.5
   shared_preferences: ^2.2.2
   sqflite: any
+  intl: ^0.18.1
   path_provider: any
   lottie: ^1.2.1
 

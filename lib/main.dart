@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:remainus/SinginSignUp/login.dart';
+import 'package:remainus/View/input_notes.dart';
 
+import 'View/home.dart';
 import 'menu.dart';
 
 void main() {

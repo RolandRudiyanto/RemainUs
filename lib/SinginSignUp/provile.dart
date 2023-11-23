@@ -31,60 +31,58 @@ class _ProfileState extends State<Profile> {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.symmetric(horizontal: 25.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("asstes/provpic.png",width: 300.0,
-                    height: 300.0,),
-                  SizedBox(height: 50,),
-                  Form(
-                    key: _formState ,
+      body: SafeArea(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: 25.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset("asstes/provpic.png",width: 300.0,
+                  height: 300.0,),
+                SizedBox(height: 50,),
+                Form(
+                  key: _formState ,
                     child: TextFormField(
-                      controller: username,
-                      decoration: InputDecoration(
-                          hintText:"Enter Username"
-                      ),
-                      validator: (value){
-                        if(value!.isEmpty){
-                          return "Masukan Sesuatu!!!";
-                        }
-
-                        return null;
-                      },
+                    controller: username,
+                    decoration: InputDecoration(
+                        hintText:"Enter Username"
                     ),
-                  ),
-                  SizedBox(height: 60,),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if(_formState.currentState!.validate()){
-                        User user = User(
-                          username: username.text,
-                        );
-                        await _dbUser.updateUser(user);
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => AboutUs()));
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return "Masukan Sesuatu!!!";
                       }
+
+                      return null;
                     },
-                    child:Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width-150,
-                      child: Center(child: Text("Continue",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),textAlign: TextAlign.center,)),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.blueAccent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                        )
-                    ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                SizedBox(height: 60,),
+                ElevatedButton(
+                  onPressed: () async {
+                    if(_formState.currentState!.validate()){
+                      User user = User(
+                        username: username.text,
+                      );
+                      await _dbUser.updateUser(user);
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => AboutUs()));
+                    }
+                  },
+                  child:Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width-150,
+                    child: Center(child: Text("Continue",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),textAlign: TextAlign.center,)),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blueAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      )
+                  ),
+                )
+              ],
             ),
           ),
         ),

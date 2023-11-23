@@ -34,6 +34,16 @@ class DatabaseHelper{
         username TEXT 
       )
 ''');
+    await db.execute('''
+      CREATE TABLE notes(
+        noteId INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        date TEXT NOT NULL,
+        year TEXT NOT NULL,
+        email TEXT NOT NULL,
+        FOREIGN KEY (email) REFERENCES user (email)
+      )
+''');
   }
 
 }

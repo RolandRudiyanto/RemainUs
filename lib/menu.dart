@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remainus/View/history.dart';
 import 'package:remainus/View/home.dart';
+import 'package:remainus/View/input_notes.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -23,7 +24,10 @@ class _MenuState extends State<Menu> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-          onPressed: (){},
+          onPressed: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => InputNotes()));
+          },
           backgroundColor: Colors.white,
           child: Icon(Icons.add,color: Colors.black,),
       ),
