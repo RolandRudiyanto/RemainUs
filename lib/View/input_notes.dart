@@ -7,7 +7,6 @@ import 'package:remainus/Model/user.dart';
 import 'package:remainus/View/home.dart';
 
 import '../Database/database_helper.dart';
-import '../SinginSignUp/provile.dart';
 import '../menu.dart';
 
 class InputNotes extends StatefulWidget {
@@ -132,12 +131,12 @@ class _InputNotesState extends State<InputNotes> {
                       onPressed: () async {
                         if(_formState.currentState!.validate()){
                           List<User> user = await UserOprations().getUser();
-                          String? email = user.last.emial;
+                          String? username = user.last.username;
                           Notes note = Notes(
                             name: nama.text,
                             date: date.text,
                             year: tahun.text,
-                            email: email
+                            username: username
                           );
                           await _dbNote.insertNotes(note);
                           Navigator.pushReplacement(context,

@@ -21,7 +21,7 @@ class NoteOprational{
   Future<List<Notes>> getNotesByEmail(User user) async {
     Database db = await DatabaseHelper.instance.database;
     List<Map<String, dynamic>> allUser = await db.query('''
-    SELECT * FROM notes WHERE notes.emial = ${user.emial}
+    SELECT * FROM notes WHERE notes.username = ${user.username}
     ''');
     List<Notes> note = allUser.map((note)=> Notes.formMap(note)).toList();
     return note;

@@ -11,10 +11,10 @@ class UserOprations{
     return await db.insert('user', user.toMap());
   }
 
-  Future<User?> signIn(String email, String password) async {
+  Future<User?> signIn(String username, String password) async {
     Database db = await DatabaseHelper.instance.database;
     List<Map<String, dynamic>> maps = await db.query('user',
-        where: 'email = ? AND password = ?', whereArgs: [email, password]);
+        where: 'username = ? AND password = ?', whereArgs: [username, password]);
 
     if (maps.isNotEmpty) {
       return User.fromMap(maps.first);

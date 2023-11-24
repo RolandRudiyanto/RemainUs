@@ -14,10 +14,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  User user = User();
+  User user = new User();
 
   NoteOprational? _dbNote;
+
   late Future<List<Notes>> noteList;
+
+
 
   @override
   void initState(){
@@ -37,14 +40,13 @@ class _HomeState extends State<Home> {
       backgroundColor: Color(0xff1ba0e2),
       appBar: AppBar(
         actions: <Widget>[
-          Padding(padding: EdgeInsets.only(left: 20)),
+          Padding(padding: EdgeInsets.only(left: 30)),
           Row(
             children: [
               Center(
                 child: Text("${user.username}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),)
               ),
-              Padding(padding: EdgeInsets.only(left: 20)),
-              Image.asset("asstes/provpic.png",),
+              SizedBox(width: 20,)
             ],
           )
         ],
@@ -90,6 +92,7 @@ class _HomeState extends State<Home> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
                                 border: Border.all(color: Colors.black,width: 5,style: BorderStyle.solid),
+                                  color: Colors.white
                               ),
                               child: Center(
                                 child: Container(

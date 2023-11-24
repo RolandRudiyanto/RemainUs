@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remainus/Database/user_opration.dart';
 import 'package:remainus/Model/user.dart';
-import 'package:remainus/SinginSignUp/provile.dart';
+import 'package:remainus/SinginSignUp/about_us.dart';
 
 
 class SignIn extends StatefulWidget {
@@ -51,18 +51,17 @@ class _SignInState extends State<SignIn> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text("Email",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                      Text("Username",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
                       SizedBox(height: 2,),
                       TextFormField(
                         controller: email,
                         decoration: InputDecoration(
-                            hintText:"Enter email"
+                            hintText:"Enter username"
                         ),
                         validator: (value){
                           if(value!.isEmpty){
                             return "Masukan Sesuatu!!!";
                           }
-
                           return null;
                         },
                       ),
@@ -108,7 +107,7 @@ class _SignInState extends State<SignIn> {
                     );
                     if(user != null) {
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Profile()));
+                          MaterialPageRoute(builder: (context) => AboutUs()));
                     }
                     else{
                       print("Email dan Password Salah!!");

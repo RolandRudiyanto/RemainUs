@@ -29,19 +29,40 @@ class DatabaseHelper{
     await db.execute('''
       CREATE TABLE user(
         userId INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT NOT NULL,
         password TEXT NOT NULL,
-        username TEXT 
+        username TEXT NOT NULL
       )
 ''');
+
     await db.execute('''
       CREATE TABLE notes(
         noteId INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         date TEXT NOT NULL,
         year TEXT NOT NULL,
-        email TEXT NOT NULL,
-        FOREIGN KEY (email) REFERENCES user (email)
+        username TEXT NOT NULL,
+        FOREIGN KEY (username) REFERENCES user (username)
+      )
+''');
+
+    await db.execute('''
+CREATE TABLE item (
+  belanjaId INTEGER PRIMARY KEY AUTOINCREMENT,
+  noteId INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  img TEXT NOT NULL,
+  quantity INTEGER NOT NULL,
+  harga INTEGER NOT NULL,
+  FOREIGN KEY (noteId) REFERENCES notes (noteId)
+)
+''');
+
+    await db.execute('''
+      CREATE TABLE total(
+        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+        noteId INTEGER NOT NULL,
+        total INTEGER NOT NULL,
+        FOREIGN KEY (noteId) REFERENCES notes (noteId)
       )
 ''');
   }

@@ -49,19 +49,19 @@ class _SignUpState extends State<SignUp> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(height: 35,),
-              Text("Sign In",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+              Text("Sign Up",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
               SizedBox(height: 60,),
               Form(
                   key: _formState,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text("Email",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                      Text("Username",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
                       SizedBox(height: 2,),
                       TextFormField(
                         controller: email,
                         decoration: InputDecoration(
-                            hintText:"Enter email"
+                            hintText:"Enter username"
                         ),
                         validator: (value){
                           if(value == null || value!.isEmpty){
@@ -144,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                 onPressed: () async {
                   if(_formState.currentState!.validate()){
                     User user = User(
-                      emial: email.text,
+                      username: email.text,
                       password: pasword.text,
                     );
                     await _dbUser.insertUser(user);
