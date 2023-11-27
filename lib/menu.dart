@@ -3,8 +3,9 @@ import 'package:remainus/View/history.dart';
 import 'package:remainus/View/home.dart';
 import 'package:remainus/View/input_notes.dart';
 
+import 'Model/user.dart';
+
 class Menu extends StatefulWidget {
-  const Menu({super.key});
 
   @override
   State<Menu> createState() => _MenuState();

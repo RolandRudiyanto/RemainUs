@@ -6,7 +6,8 @@ class Belanja{
   late int? quantity;
   late int? harga;
 
-  Belanja({this.belanjaId, this.noteId, this.name, this.img, this.quantity, this.harga, });
+
+  Belanja({this.belanjaId, this.noteId, this.name, this.img, this.quantity, this.harga});
 
   Belanja.formMap(dynamic ojb){
     this.belanjaId = ojb['belanjaId'];

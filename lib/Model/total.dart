@@ -1,22 +1,23 @@
-import 'dart:html';
-
 class Total {
-  late int? totalId;
-  late int? notesId;
-  late int? total;
+  late int? Id;
+  late int? userId;
+  late String? year;
+  late int? totalAmount;
 
-  Total({this.totalId, this.notesId, this.total});
+  Total({this.Id,this.userId, this.year, this.totalAmount});
 
   Total.formMap(dynamic ojb){
-    this.totalId = ojb['totalId'];
-    this.notesId = ojb['notesId'];
-    this.total = ojb['total'];
+    this.Id = ojb['Id'];
+    this.userId = ojb['userId'];
+    this.totalAmount = ojb['totalAmount'];
+    this.year = ojb['year'];
   }
 
   Map<String, dynamic> toMap(){
     var map = <String,dynamic>{
-      'notesId':notesId,
-      'total':total
+      'userId' : userId,
+      'totalAmount' : totalAmount,
+      'year' : year,
     };
     return map;
   }

@@ -4,8 +4,9 @@ class Notes{
   late String? date;
   late String? name;
   late String? year;
+  late int? total;
 
-  Notes({this.noteId, this.name, this.date, this.year, this.username});
+  Notes({this.noteId, this.name, this.date, this.year, this.username,this.total});
 
   Notes.formMap(dynamic ojb){
     this.noteId = ojb['noteId'];
@@ -13,6 +14,7 @@ class Notes{
     this.date = ojb['date'];
     this.year = ojb['year'];
     this.username = ojb['username'];
+    this.total = ojb['total'];
   }
 
   Map<String, dynamic> toMap(){
@@ -20,7 +22,8 @@ class Notes{
       'name' : name,
       'date' : date,
       'year' : year,
-      'username' : username
+      'username' : username,
+      'total' : total,
     };
     return map;
   }

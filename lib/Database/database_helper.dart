@@ -41,6 +41,7 @@ class DatabaseHelper{
         date TEXT NOT NULL,
         year TEXT NOT NULL,
         username TEXT NOT NULL,
+        total INTEGER NOT NULL,
         FOREIGN KEY (username) REFERENCES user (username)
       )
 ''');
@@ -60,11 +61,22 @@ CREATE TABLE item (
     await db.execute('''
       CREATE TABLE total(
         Id INTEGER PRIMARY KEY AUTOINCREMENT,
-        noteId INTEGER NOT NULL,
-        total INTEGER NOT NULL,
-        FOREIGN KEY (noteId) REFERENCES notes (noteId)
+        userId INTEGER NOT NULL,
+        totalAmount INTEGER NOT NULL,
+        year TEXT NOT NULL,
+        FOREIGN KEY (userId) REFERENCES user (userId)
       )
 ''');
+
+//     await db.execute('''
+//       CREATE TABLE tahuntotal(
+//         id INTEGER PRIMARY KEY AUTOINCREMENT,
+//         userId INTEGER NOT NULL,
+//         totalHarga INTEGER NOT NULL,
+//         tahun TEXT NOT NULL,
+//         FOREIGN KEY (userId) REFERENCES user (userId)
+//       )
+// ''');
   }
 
 }

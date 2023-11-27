@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:remainus/Database/item_opration.dart';
+import 'package:remainus/Database/note_operation.dart';
+import 'package:remainus/Database/total_operation.dart';
+import 'package:remainus/Model/belanja_item.dart';
+import 'package:remainus/Model/notes.dart';
+import 'package:remainus/menu.dart';
 
+import '../Database/user_opration.dart';
 import '../Model/barang.dart';
+import '../Model/total.dart';
+import '../Model/user.dart';
 
 class InputItem extends StatefulWidget {
+
+  // final Notes note;
+  //
+  // InputItem({required this.note});
 
 
   @override
@@ -13,6 +26,14 @@ class _InputItemState extends State<InputItem> {
   final _formState = GlobalKey<FormState>();
   final cari = TextEditingController();
   final cariFocus = FocusNode();
+
+  // final Notes note;
+  //
+  // _InputItemState({required this.note});
+
+  ItemOprational _Dbitem = ItemOprational();
+  NoteOprational _Dbnotes = NoteOprational();
+  TotalOperation _Dbtotal = TotalOperation();
 
   int total = 0;
   List<Barang> _filterBarang = [];
@@ -92,14 +113,25 @@ class _InputItemState extends State<InputItem> {
                                           title: Text(belanja.nama,style: TextStyle(fontWeight: FontWeight.bold)),
                                           subtitle: Text('Harga: \Rp.${belanja.harga}'),
                                           trailing: IconButton(
-                                              onPressed: (){
+                                              onPressed: () async {
                                                 setState(() {
                                                   total += belanja.harga;
+                                                  belanja.quantity += 1;
                                                 });
+                                                List<Notes> notes = await NoteOprational().getNotes();
+                                                int? id = notes.last.noteId;
+                                                Belanja item = Belanja(
+                                                  name: belanja.nama,
+                                                  harga: belanja.harga,
+                                                  img: belanja.gambarPath,
+                                                  noteId: id,
+                                                  quantity: belanja.quantity
+                                                );
+                                                await _Dbitem.insertOrUpdateItem(item);
                                                 ScaffoldMessenger.of(context).showSnackBar(
                                                     SnackBar(
                                                         duration: Duration(microseconds: 20000),
-                                                        content: Text("Item Telah Dimasukan",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                                                        content: Text("Item Telah Dimasukan ${belanja.quantity}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
                                                         backgroundColor: Colors.red,
                                                     )
                                                 );
@@ -129,6 +161,36 @@ class _InputItemState extends State<InputItem> {
                                     Text("Total Harga :",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                                     Text(total.toString(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                                   ],
+                                ),
+                              ),
+                              SizedBox(height: 25,),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  List<Notes> notes = await NoteOprational().getNotes();
+                                  int? id = notes.last.noteId;
+                                  List<User> user = await UserOprations().getUser();
+                                  int? userid = user.last.userId;
+                                  Total amount = Total(
+                                    userId: userid,
+                                    totalAmount: total,
+                                    year: notes.last.year
+                                  );
+                                  await _Dbtotal.updateOrInsertNotes(amount);
+                                  await _Dbnotes.updateUser(id,total);
+                                    Navigator.pushReplacement(context,
+                                        MaterialPageRoute(builder: (context) => Menu()));
+                                    // print("${nama.text},${date.text},${tahun.text},${email}");
+                                },
+                                child:Container(
+                                  height: 50,
+                                  width: MediaQuery.of(context).size.width-200,
+                                  child: Center(child: Text("Save".toUpperCase(),style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),textAlign: TextAlign.center,)),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Color(0xff08457e),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    )
                                 ),
                               )
                             ],

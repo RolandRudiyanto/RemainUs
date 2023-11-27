@@ -3,6 +3,8 @@ import 'package:remainus/Database/user_opration.dart';
 import 'package:remainus/Model/user.dart';
 import 'package:remainus/SinginSignUp/about_us.dart';
 
+import '../menu.dart';
+
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -107,7 +109,7 @@ class _SignInState extends State<SignIn> {
                     );
                     if(user != null) {
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => AboutUs()));
+                          MaterialPageRoute(builder: (context) => Menu()));
                     }
                     else{
                       print("Email dan Password Salah!!");

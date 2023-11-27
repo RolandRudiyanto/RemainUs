@@ -5,6 +5,7 @@ import 'package:remainus/Database/user_opration.dart';
 import 'package:remainus/Model/notes.dart';
 import 'package:remainus/Model/user.dart';
 import 'package:remainus/View/home.dart';
+import 'package:remainus/View/input_item.dart';
 
 import '../Database/database_helper.dart';
 import '../menu.dart';
@@ -25,11 +26,6 @@ class _InputNotesState extends State<InputNotes> {
   final tahunFocus = FocusNode();
   final namaFocus = FocusNode();
 
-
-
-
-
-  // List<User> user = UserOprations().getUser() as List<User>;
 
   NoteOprational _dbNote = NoteOprational();
 
@@ -133,14 +129,15 @@ class _InputNotesState extends State<InputNotes> {
                           List<User> user = await UserOprations().getUser();
                           String? username = user.last.username;
                           Notes note = Notes(
-                            name: nama.text,
+                           name: nama.text,
                             date: date.text,
                             year: tahun.text,
-                            username: username
+                            username: username,
+                            total: 0,
                           );
                           await _dbNote.insertNotes(note);
                           Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => Menu()));
+                              MaterialPageRoute(builder: (context) => InputItem()));
                           // print("${nama.text},${date.text},${tahun.text},${email}");
                         }
                       },
